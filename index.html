@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WeatherGuard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="sky-shape cloud-one"></div>
+  <div class="sky-shape cloud-two"></div>
+  <div class="sky-shape sun-halo"></div>
+
+  <div class="app-shell">
+    <header class="hero">
+      <div class="brand-row">
+        <div class="logo-mark">☀️</div>
+        <div>
+          <h1>WeatherGuard</h1>
+          <p>Hava durumunu günlük karar asistanına dönüştür.</p>
+        </div>
+      </div>
+
+      <form class="search-panel" id="searchForm">
+        <div class="search-field">
+          <span>🔎</span>
+          <input id="cityInput" type="search" placeholder="Şehir ara: İstanbul, Ankara, İzmir..." autocomplete="off">
+        </div>
+        <button class="primary-button" type="submit">Ara</button>
+        <button class="ghost-button" id="locationButton" type="button">📍 Konumumu Kullan</button>
+      </form>
+
+      <div class="search-results hidden" id="searchResults"></div>
+      <div class="recent-row" id="recentSearches"></div>
+      <div class="message hidden" id="messageBox"></div>
+    </header>
+
+    <main>
+      <section class="smart-summary hidden" id="smartSummary"></section>
+
+      <section class="top-grid">
+        <article class="current-card dashboard-card" id="currentWeather">
+          <div class="empty-state">
+            <strong>Bir şehir seçerek başlayın.</strong>
+            <span>WeatherGuard güncel hava, risk ve günlük karar önerilerini birlikte gösterir.</span>
+          </div>
+        </article>
+
+        <article class="risk-card dashboard-card" id="riskAnalysis">
+          <div class="card-heading">
+            <span>🛡️</span>
+            <h2>Günlük Risk Skoru</h2>
+          </div>
+          <div class="empty-state">
+            <span>Risk analizi hava verisi geldikten sonra hazırlanır.</span>
+          </div>
+        </article>
+      </section>
+
+      <section class="assistant-grid">
+        <article class="dashboard-card timing-card" id="timingAdvice">
+          <div class="card-heading">
+            <span>🕒</span>
+            <h2>Şimdi mi, Sonra mı?</h2>
+          </div>
+          <div class="empty-state">
+            <span>Şehir seçilince önümüzdeki saatler için en uygun çıkış zamanı hesaplanır.</span>
+          </div>
+        </article>
+
+        <article class="dashboard-card compact-chart-card">
+          <div class="card-heading">
+            <span>📈</span>
+            <h2>Gün İçi Risk Grafiği</h2>
+          </div>
+          <div class="risk-bars" id="riskChart"></div>
+        </article>
+      </section>
+
+      <section>
+        <div class="section-title">
+          <h2>Günlük Kararlar</h2>
+          <p>Şemsiye, spor, ulaşım ve güneş için hızlı öneriler.</p>
+        </div>
+        <div class="decision-grid" id="decisionCards"></div>
+      </section>
+
+      <section class="workspace-panel">
+        <div class="workspace-tabs" role="tablist" aria-label="Ek araçlar">
+          <button class="tab-button active" type="button" data-tab="plan">Plan Kontrolü</button>
+          <button class="tab-button" type="button" data-tab="compare">Karşılaştırma</button>
+        </div>
+
+        <div class="workspace-content active" id="planTab">
+          <div class="side-form">
+            <label>
+              Plan türü
+              <select id="planType">
+                <option value="walk">Yürüyüş</option>
+                <option value="sport">Dışarıda spor</option>
+                <option value="bike">Bisiklet / motosiklet</option>
+                <option value="laundry">Çamaşır asma</option>
+                <option value="commute">Ulaşım</option>
+              </select>
+            </label>
+            <label>
+              Saat
+              <input id="planTime" type="time">
+            </label>
+            <button class="primary-button" id="checkPlanButton" type="button">Planı Kontrol Et</button>
+          </div>
+          <div class="tool-result" id="planResult">
+            Şehir seçildikten sonra planını belirli bir saate göre kontrol edebilirsin.
+          </div>
+        </div>
+
+        <div class="workspace-content" id="compareTab">
+          <div class="side-form compare-form">
+            <label>
+              Karşılaştırılacak şehir
+              <input id="compareInput" type="search" placeholder="Örn: Ankara">
+            </label>
+            <button class="primary-button" id="compareButton" type="button">Karşılaştır</button>
+          </div>
+          <div class="tool-result" id="compareResult">
+            Mevcut şehirle ikinci bir şehri sıcaklık, yağış, rüzgar ve risk açısından yan yana kıyaslar.
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-title">
+          <h2>Sonraki 12 Saat</h2>
+          <p>Kısa vadeli değişimi kaçırmayın.</p>
+        </div>
+        <div class="hourly-strip" id="hourlyForecast"></div>
+      </section>
+
+      <section>
+        <div class="section-title">
+          <h2>7 Günlük Tahmin</h2>
+          <p>Haftaya daha geniş açıdan bakın.</p>
+        </div>
+        <div class="daily-grid" id="dailyForecast"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
